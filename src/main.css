@@ -1,0 +1,30 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.fade-enter-active, .fade-leave-active {
+  @apply transition-opacity duration-500;
+}
+.fade-enter-from, .fade-leave-to {
+  @apply opacity-0;
+}
+
+.slide-enter-active, .slide-leave-active {
+  @apply transition-transform  duration-300;
+}
+
+.slide-enter-from, .slide-leave-to {
+  @apply -translate-x-full scale-0 opacity-0;
+}
+
+.slide-enter-to, .slide-leave-from {
+  @apply translate-x-0 scale-100 opacity-100;
+}
