@@ -22,13 +22,14 @@
             @click="showModal(item)"
             class="w-80 bg-base-100 shadow-xl mx-auto my-4 rounded-2xl"
           >
-            <figure>
+            <figure class="flex items-center justify-center relative">
               <img class="object-cover" :src="item.imagem" :alt="'Image ' + item.id" />
+              <img :src="item.lancamento" class="absolute left-2 top-10 w-24" v-if="item.lancamento" />
             </figure>
 
             <div class="flex items-center justify-center py-5">
               <div class="flex flex-col flex-grow px-4">
-                <h2 class="font-bold text-base text-left whitespace-nowrap">
+                <h2 class="font-bold text-base text-left whitespace">
                   {{ item.title }}
                 </h2>
                 <h3 class="font-normal text-base text-left">{{ item.id_produto }}</h3>

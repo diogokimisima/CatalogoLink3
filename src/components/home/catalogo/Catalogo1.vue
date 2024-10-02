@@ -16,17 +16,18 @@
           @click="showModal(data.selectedCard)"
           :class="['w-80 bg-base-100 border-b border-neutral-300 rounded-none mx-auto', {'rounded-xl': data.items.length === 1}]"
         >
-          <figure>
+          <figure class="flex items-center justify-center relative">
             <img
-              class="object-cover"
+              class="object-cover "
               :src="data.selectedCard.imagem"
               :alt="'Image ' + data.selectedCard.id"
             />
+            <img :src="data.selectedCard.lancamento" class="absolute left-2 top-10 w-24" v-if="data.selectedCard.lancamento" />
           </figure>
 
           <div class="flex items-center justify-center py-5">
             <div class="flex flex-col flex-grow px-4">
-              <h2 class="font-bold text-base text-left whitespace-nowrap">
+              <h2 class="font-bold text-base text-left">
                 {{ data.selectedCard.title }}
               </h2>
               <h3 class="font-normal text-base text-left">
