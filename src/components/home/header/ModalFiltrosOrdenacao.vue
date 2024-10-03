@@ -65,6 +65,13 @@
           </button>
           <label for="sortByLowPrice" class="ml-2 cursor-pointer">Menor preço</label>
         </li>
+        <li class="mb-2 flex items-center">
+          <button @click="sortBy('lancamento')">
+            <Circle v-if="selectedSortBy != 'lancamento'" class="rounded-full" />
+            <CircleDot v-else class="rounded-full text-white bg-black" />
+          </button>
+          <label for="sortByLowPrice" class="ml-2 cursor-pointer">Lançamento</label>
+        </li>
       </ul>
     </div>
 
@@ -95,6 +102,7 @@
         </li>
       </ul>
     </div>
+
 
     <!-- CORES -->
     <div v-motion-fade-visible class="border-t border-slate-400">

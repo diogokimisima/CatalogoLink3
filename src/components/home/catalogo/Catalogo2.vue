@@ -150,6 +150,8 @@ const groupedCatalogo = computed(() => {
       const discountPercentB = ((b.valor_antigo - b.valor) / b.valor_antigo) * 100;
       return discountPercentA - discountPercentB;
     });
+  } else if (sortByCriteria.value === "lancamento") {
+    filteredItems = filteredItems.filter((item) => item.lancamento);
   }
 
   if (selectedColors.value.length > 0) {
