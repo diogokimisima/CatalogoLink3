@@ -29,7 +29,7 @@
       </div>
     </form>
 
-    <div class="my-5 px-4">
+    <div class="my-5 px-4 flex justify-center items-center">
       <img :src="selectedItem?.imagem" alt="imagem" />
     </div>
 
