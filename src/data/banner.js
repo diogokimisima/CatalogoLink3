@@ -6,11 +6,11 @@ import banner4 from "../assets/images/banner4.png"
 export const banner = [
     {
         id: 1,
-        imagem: banner3
+        imagem: banner4
     },
     {
         id: 2,
-        imagem: banner4
+        imagem: banner3
     }
 ]
 
