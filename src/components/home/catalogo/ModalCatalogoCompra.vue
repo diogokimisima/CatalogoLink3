@@ -35,7 +35,7 @@
 
     <h2 class="my-3 text-center font-bold">Cores e modelos</h2>
 
-    <div v-if="relatedItems.length > 1" class="overflow-y-auto flex items-center font-bold h-26 w-full my-5 px-4" id="categoriaIgual">
+    <div v-if="relatedItems.length > 1" class="scrollbar-none overflow-y-auto flex items-center font-bold h-26 w-full my-5 px-4" id="categoriaIgual">
       <ul class="flex flex-row space-x-2 gap-5 py-5">
         <li v-motion-fade-visible class="rounded w-28" v-for="relatedItem in relatedItems" :key="relatedItem.id" :class="{
           'border-b-2 border-gray-400 transition-colors duration-500 ease-in-out':

@@ -42,10 +42,10 @@
 
     <div
       v-if="relatedItems.length > 1"
-      class="overflow-y-auto flex items-center font-bold h-26 w-full my-5 px-4"
+      class="overflow-y-auto flex items-center font-bold h-26 w-full my-5 px-4 scrollbar-none"
       id="categoriaIgual"
     >
-      <ul class="flex flex-row space-x-2 gap-5 py-5">
+      <ul class="flex flex-row space-x-2 gap-5 py-5 ">
         <li
           v-motion-fade-visible
           class="rounded w-28"

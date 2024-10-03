@@ -61,7 +61,7 @@
 
         <!-- Imagens da mesma categoria -->
         <div v-if="data.items.length > 1" class="px-6">
-          <div class="flex flex-row space-x-4 py-6 px-2 mx-auto overflow-x-auto ">
+          <div class="flex flex-row space-x-4 py-6 px-2 mx-auto overflow-x-auto scrollbar-none">
             <img
               v-for="item in data.items"
               :key="item.id"

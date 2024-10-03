@@ -10,6 +10,15 @@
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
+}
+
+.scrollbar-none {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;     /* Firefox */
+}
+
 .fade-enter-active, .fade-leave-active {
   @apply transition-opacity duration-500;
 }
