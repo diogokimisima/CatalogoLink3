@@ -17,9 +17,19 @@
           <Trash2
             v-if="selectedSortBy != null && selectedSizes != [] && selectedColors != []"
           />
-          <Trash v-else />
+          <Trash class="text-black text-opacity-20" v-else />
         </button>
-        <p class="font-semibold">Remover todos os filtros</p>
+        <p
+          :class="{
+            'text-black text-opacity-20': !(
+              selectedSortBy != null &&
+              selectedSizes != [] &&
+              selectedColors != []
+            ),
+          }"
+        >
+          Remover todos os filtros
+        </p>
       </div>
     </div>
 
@@ -35,42 +45,85 @@
       <ul v-if="displayStates.sortBy" class="my-3">
         <li class="mb-2 flex items-center">
           <button @click="sortBy('lowDiscount')">
-            <Circle v-if="selectedSortBy !== 'lowDiscount'" class="rounded-full" />
+            <Circle
+              v-if="selectedSortBy !== 'lowDiscount'"
+              class="rounded-full text-gray-300"
+            />
             <CircleDot v-else class="rounded-full text-white bg-black" />
           </button>
-          <label for="sortByLowDiscount" class="ml-2 cursor-pointer"
+          <label
+            for="sortByLowDiscount"
+            :class="[
+              'ml-2 cursor-pointer',
+              { 'text-black text-opacity-50': selectedSortBy !== 'lowDiscount' },
+            ]"
             >Menor Desconto</label
           >
         </li>
         <li class="mb-2 flex items-center">
           <button @click="sortBy('highDiscount')">
-            <Circle v-if="selectedSortBy !== 'highDiscount'" class="rounded-full" />
+            <Circle
+              v-if="selectedSortBy !== 'highDiscount'"
+              class="rounded-full text-black text-opacity-20"
+            />
             <CircleDot v-else class="rounded-full text-white bg-black" />
           </button>
-          <label for="sortByHighDiscount" class="ml-2 cursor-pointer"
+          <label
+            for="sortByHighDiscount"
+            :class="[
+              'ml-2 cursor-pointer',
+              { 'text-black text-opacity-50': selectedSortBy !== 'highDiscount' },
+            ]"
             >Maior Desconto</label
           >
         </li>
         <li class="mb-2 flex items-center">
           <button @click="sortBy('highPrice')">
-            <Circle v-if="selectedSortBy != 'highPrice'" class="rounded-full" />
+            <Circle
+              v-if="selectedSortBy != 'highPrice'"
+              class="rounded-full text-black text-opacity-20"
+            />
             <CircleDot v-else class="rounded-full text-white bg-black" />
           </button>
-          <label for="sortByHighPrice" class="ml-2 cursor-pointer">Maior preço</label>
+          <label
+            for="sortByHighPrice"
+            :class="[
+              'ml-2 cursor-pointer',
+              { 'text-black text-opacity-50': selectedSortBy !== 'highPrice' },
+            ]"
+            >Maior preço</label
+          >
         </li>
         <li class="mb-2 flex items-center">
           <button @click="sortBy('lowPrice')">
-            <Circle v-if="selectedSortBy != 'lowPrice'" class="rounded-full" />
+            <Circle
+              v-if="selectedSortBy != 'lowPrice'"
+              class="rounded-full text-black text-opacity-20"
+            />
             <CircleDot v-else class="rounded-full text-white bg-black" />
           </button>
-          <label for="sortByLowPrice" class="ml-2 cursor-pointer">Menor preço</label>
+          <label
+            for="sortByLowPrice"
+            :class="['ml-2 cursor-pointer', {'text-black text-opacity-50' : selectedSortBy !== 'lowPrice'}]"
+            >Menor preço</label
+          >
         </li>
         <li class="mb-2 flex items-center">
           <button @click="sortBy('lancamento')">
-            <Circle v-if="selectedSortBy != 'lancamento'" class="rounded-full" />
+            <Circle
+              v-if="selectedSortBy != 'lancamento'"
+              class="rounded-full text-black text-opacity-20"
+            />
             <CircleDot v-else class="rounded-full text-white bg-black" />
           </button>
-          <label for="sortByLowPrice" class="ml-2 cursor-pointer">Lançamento</label>
+          <label
+            for="sortByLowPrice"
+            :class="[
+              'ml-2 cursor-pointer',
+              { 'text-black text-opacity-50': selectedSortBy !== 'lancamento' },
+            ]"
+            >Lançamento</label
+          >
         </li>
       </ul>
     </div>
@@ -102,7 +155,6 @@
         </li>
       </ul>
     </div>
-
 
     <!-- CORES -->
     <div v-motion-fade-visible class="border-t border-slate-400">
