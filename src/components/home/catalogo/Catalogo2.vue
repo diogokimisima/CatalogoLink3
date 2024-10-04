@@ -6,12 +6,13 @@
 
     <!-- Card -->
     <div
+      v-motion-fade-visible
       v-for="(categoryItems, category) in groupedCatalogo"
       :key="category"
       class="flex flex-row flex-wrap justify-center w-full"
     >
       <div
-        class="carousel carousel-center items-center max-w-[390px] rounded-none  space-x-4 p-4 mx-auto h-auto my-2"
+        class="carousel carousel-center items-center max-w-[390px] rounded-none space-x-4 p-4 mx-auto h-auto my-2"
       >
         <div
           v-for="item in categoryItems"
@@ -24,7 +25,17 @@
           >
             <figure class="flex items-center justify-center relative">
               <img class="object-cover" :src="item.imagem" :alt="'Image ' + item.id" />
-              <img :src="item.lancamento" class="absolute left-2 top-10 w-24" v-if="item.lancamento" />
+              <img
+                class="absolute right-3 top-3"
+                :src="getFavoriteImageSrc(item)"
+                alt="logo favorito"
+                @click.stop="handleAddToFavorites(item)"
+              />
+              <img
+                :src="item.lancamento"
+                class="absolute left-2 top-10 w-24"
+                v-if="item.lancamento"
+              />
             </figure>
 
             <div class="flex items-center justify-center py-5">
@@ -93,6 +104,9 @@ import { catalogo } from "../../../data/catalogo2.js";
 import ToastSuccess from "../../toasts/ToastSuccess.vue";
 import ModalCatalogoCompra2 from "./ModalCatalogoCompra2.vue";
 
+import favoriteIcon from "../../../assets/images/favorite.svg";
+import favoriteFilled from "../../../assets/images/favorite2.svg";
+
 const props = defineProps({
   selectedCategory: {
     type: String,
@@ -112,6 +126,15 @@ const showToast = ref(false);
 
 const store = useStore();
 const emit = defineEmits(["adicionarAoCarrinho", "clear-filters"]);
+
+const favoriteItems = computed(() => store.getters.favoritesItems);
+
+const getFavoriteImageSrc = (item) => {
+  const isFavorite = store.getters.favoritesItems.some(
+    (favItem) => favItem.codigoProduto === item.id_produto
+  );
+  return isFavorite ? favoriteFilled : favoriteIcon;
+};
 
 const groupedCatalogo = computed(() => {
   let filteredItems = catalogo;
@@ -212,6 +235,17 @@ const handleAddToCart = () => {
   setTimeout(() => {
     showToast.value = false;
   }, 3000);
+};
+
+const handleAddToFavorites = (item) => {
+  store.dispatch("addFavorite", {
+    codigoProduto: item.id_produto,
+    nomeProduto: item.title,
+    imagem: item.imagem,
+    cor: item.cor,
+    valorUnitario: item.valor,
+    valorAntigo: item.valor_antigo,
+  });
 };
 
 const getQuantidade = (productId, size) => {

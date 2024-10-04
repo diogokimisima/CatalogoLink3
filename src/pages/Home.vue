@@ -7,16 +7,19 @@
       v-if="currentLayout === 'layout1'"
       :selectedCategory="selectedCategory"
       @adicionarAoCarrinho="adicionarAoCarrinho"
+      @adicionarAosFavoritos="adicionarAosFavoritos"
     />
     <Catalogo2
       v-if="currentLayout === 'layout2'"
       :selectedCategory="selectedCategory"
       @adicionarAoCarrinho="adicionarAoCarrinho"
+      @adicionarAosFavoritos="adicionarAosFavoritos"
     />
     <Catalogo3
       v-if="currentLayout === 'layout3'"
       :selectedCategory="selectedCategory"
       @adicionarAoCarrinho="adicionarAoCarrinho"
+      @adicionarAosFavoritos="adicionarAosFavoritos"
     />
     <BackTop />
   </div>
@@ -65,5 +68,20 @@ const adicionarAoCarrinho = ({
     quantidadePorTamanho,
   });
   router.push({ path: "/carrinho" });
+};
+
+const adicionarAosFavoritos = ({
+  codigoProduto,
+  nomeProduto,
+  imagem,
+  cor,
+}) => {
+  store.dispatch("addFavorite", {
+    codigoProduto,
+    nomeProduto,
+    imagem,
+    cor,
+  });
+  router.push({ path: "/favoritos" }); // Redireciona para a página de favoritos
 };
 </script>

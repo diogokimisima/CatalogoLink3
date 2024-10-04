@@ -21,7 +21,6 @@
       <div class="flex flex-row -mb-2">
         <h3 class="font-bold text-lg">
           {{ selectedItem?.title }}
-          <span class="font-semibold">({{ selectedItem?.id_produto }})</span>
         </h3>
         <div class="flex-grow"></div>
         <button class="btn btn-sm btn-circle btn-ghost border-none focus:outline-none">
@@ -30,7 +29,10 @@
       </div>
 
       <div class="flex flex-row">
-        <p class="text-lg font-semibold">{{ selectedItem?.cor }}</p>
+        <p class="text-lg text-black">
+          {{ selectedItem?.cor }} -
+          <span>({{ selectedItem?.id_produto }})</span>
+        </p>
       </div>
     </form>
 
@@ -45,7 +47,7 @@
       class="overflow-y-auto flex items-center font-bold h-26 w-full my-5 px-4 scrollbar-none"
       id="categoriaIgual"
     >
-      <ul class="flex flex-row space-x-2 gap-5 py-5 ">
+      <ul class="flex flex-row space-x-2 gap-5 py-5">
         <li
           v-motion-fade-visible
           class="rounded w-28"
@@ -98,7 +100,7 @@
       </table>
     </div>
 
-    <div :class="['px-4 mt-4', {'mb-28': relatedItems.length === 1}]">
+    <div :class="['px-4 mt-4', { 'mb-28': relatedItems.length === 1 }]">
       <p class="italic">
         <span class="font-semibold">Valor Unitário:</span> R${{ selectedItem?.valor }}
       </p>

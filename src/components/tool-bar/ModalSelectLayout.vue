@@ -17,9 +17,9 @@
               class="text-white bg-black rounded-full"
               v-if="selectedLayout === 'layout1'"
             />
-            <Circle v-else />
+            <Circle class="text-black opacity-20" v-else />
           </button>
-          <label>Layout 1</label>
+          <label :class="{ 'text-black opacity-50' : selectedLayout !== 'layout1'}">Layout 1</label>
         </li>
         <li class="flex mb-2 gap-1">
           <button @click="selectLayout('layout2')">
@@ -27,9 +27,9 @@
               class="text-white bg-black rounded-full"
               v-if="selectedLayout === 'layout2'"
             />
-            <Circle v-else />
+            <Circle class="text-black opacity-20" v-else />
           </button>
-          <label>Layout 2</label>
+          <label :class="{ 'text-black opacity-50' : selectedLayout !== 'layout2'}">Layout 2</label>
         </li>
         <li class="flex mb-2 gap-1">
           <button @click="selectLayout('layout3')">
@@ -37,9 +37,9 @@
               class="text-white bg-black rounded-full"
               v-if="selectedLayout === 'layout3'"
             />
-            <Circle v-else />
+            <Circle class="text-black opacity-20" v-else />
           </button>
-          <label>Layout 3</label>
+          <label :class="{ 'text-black opacity-50' : selectedLayout !== 'layout3'}">Layout 3</label>
         </li>
       </ul>
     </div>

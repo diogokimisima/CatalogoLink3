@@ -10,11 +10,13 @@
     <div
       class="max-w-screen-2xl flex flex-row flex-wrap justify-center items-center mx-auto gap-2.5"
     >
-      <div v-for="(item, index) in filteredCatalogo" :key="item.id">
+      <div v-motion-fade-visible v-for="(item, index) in filteredCatalogo" :key="item.id">
         <CatalogoCard
           :item="item"
           :is-last-card="index === filteredCatalogo.length - 1"
+          :get-favorite-image-src="getFavoriteImageSrc"
           @showModal="showModal"
+          @add-to-favorites="handleAddToFavorites"
         />
       </div>
     </div>
@@ -52,6 +54,9 @@ import ToastSuccess from "../../toasts/ToastSuccess.vue";
 import CatalogoCard from "./CatalogoCard.vue";
 import ModalCatalogoCompra from "./ModalCatalogoCompra2.vue";
 
+import favoriteIcon from "../../../assets/images/favorite.svg";
+import favoriteFilled from "../../../assets/images/favorite2.svg";
+
 const props = defineProps({
   selectedCategory: {
     type: String,
@@ -71,6 +76,15 @@ const showToast = ref(false);
 
 const store = useStore();
 const emit = defineEmits(["adicionarAoCarrinho", "clear-filters"]);
+
+const favoriteItems = computed(() => store.getters.favoritesItems);
+
+const getFavoriteImageSrc = (item) => {
+  const isFavorite = store.getters.favoritesItems.some(
+    (favItem) => favItem.codigoProduto === item.id_produto
+  );
+  return isFavorite ? favoriteFilled : favoriteIcon;
+};
 
 const updateCategory = (categoria) => {
   selectedCategory.value = categoria;
@@ -113,6 +127,17 @@ const handleAddToCart = () => {
   setTimeout(() => {
     showToast.value = false;
   }, 3000);
+};
+
+const handleAddToFavorites = (item) => {
+  store.dispatch("addFavorite", {
+    codigoProduto: item.id_produto,
+    nomeProduto: item.title,
+    imagem: item.imagem,
+    cor: item.cor,
+    valorUnitario: item.valor,
+    valorAntigo: item.valor_antigo,
+  });
 };
 
 const getQuantidade = (id, tamanho) => {

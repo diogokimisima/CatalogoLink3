@@ -1,14 +1,9 @@
 <template>
-  <li
-    v-motion-fade-visible
-    class="mb-6 p-2 rounded-md shadow-md shadow-neutral-400"
-  >
+  <li v-motion-fade-visible class="mb-6 p-2 rounded-md shadow-md shadow-neutral-400">
     <div class="flex flex-col">
       <div class="flex flex-row items-center justify-between">
         <h2 class="text-lg">
-          <span class="font-bold"
-            >{{ index + 1 }} - {{ item.nomeProduto }}</span
-          >
+          <span class="font-bold">{{ index + 1 }} - {{ item.nomeProduto }}</span>
           ({{ item.codigoProduto }})
         </h2>
         <button @click="showModal(item)">
@@ -63,8 +58,8 @@
 </template>
 
 <script setup>
-import { Trash2 } from 'lucide-vue-next';
-import { formatPrice } from '../../utils/formatarValores';
+import { Trash2 } from "lucide-vue-next";
+import { formatPrice } from "../../utils/formatarValores";
 
 const props = defineProps({
   item: Object,
@@ -72,6 +67,4 @@ const props = defineProps({
   showModal: Function,
   somaQuantidade: Function,
 });
-
-
 </script>

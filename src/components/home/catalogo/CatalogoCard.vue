@@ -10,6 +10,12 @@
     <figure class="flex items-center justify-center relative">
       <img :src="item.imagem" :alt="'Image ' + item.id" />
       <img :src="item.lancamento" class="absolute left-2 top-10 w-24" v-if="item.lancamento" />
+      <img
+        class="absolute right-3 top-3"
+        :src="getFavoriteImageSrc(item)"
+        alt="logo favorito"
+        @click.stop="addToFavorites(item)"
+      />
     </figure>
 
     <div class="flex items-center justify-center py-5">
@@ -47,11 +53,19 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
+  getFavoriteImageSrc: {
+    type: Function,
+    required: true,
+  },
 });
 
-const emit = defineEmits(["showModal"]);
+const emit = defineEmits(["showModal", "add-to-favorites"]);
 
 const showModal = (item) => {
   emit("showModal", item);
+};
+
+const addToFavorites = (item) => {
+  emit("add-to-favorites", item);
 };
 </script>

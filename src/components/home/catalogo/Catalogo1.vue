@@ -3,9 +3,10 @@
     <div v-if="groupedCatalogo.length === 0" class="text-center mt-5">
       <h1 class="font-semibold">NENHUM PRODUTO ENCONTRADO.</h1>
     </div>
-    
+
     <!-- Card -->
     <div
+      v-motion-fade-visible
       v-for="(data, category) in groupedCatalogo"
       :key="category"
       class="flex justify-center flex-row flex-wrap mx-auto py-4"
@@ -14,15 +15,28 @@
       <div class="flex flex-col justify-center w-[370px] shadow-xl rounded-xl">
         <button
           @click="showModal(data.selectedCard)"
-          :class="['w-80 bg-base-100 border-b border-neutral-300 rounded-none mx-auto', {'rounded-xl': data.items.length === 1}]"
+          :class="[
+            'w-80 bg-base-100 border-b border-neutral-300 rounded-none mx-auto',
+            { 'rounded-xl': data.items.length === 1 },
+          ]"
         >
           <figure class="flex items-center justify-center relative">
             <img
-              class="object-cover "
+              class="object-cover"
               :src="data.selectedCard.imagem"
               :alt="'Image ' + data.selectedCard.id"
             />
-            <img :src="data.selectedCard.lancamento" class="absolute left-2 top-10 w-24" v-if="data.selectedCard.lancamento" />
+            <img
+              class="absolute right-3 top-3"
+              :src="getFavoriteImageSrc(data.selectedCard)"
+              alt="logo favorito"
+              @click.stop="handleAddToFavorites(data.selectedCard)"
+            />
+            <img
+              :src="data.selectedCard.lancamento"
+              class="absolute left-2 top-10 w-24"
+              v-if="data.selectedCard.lancamento"
+            />
           </figure>
 
           <div class="flex items-center justify-center py-5">
@@ -61,7 +75,9 @@
 
         <!-- Imagens da mesma categoria -->
         <div v-if="data.items.length > 1" class="px-6">
-          <div class="flex flex-row space-x-4 py-6 px-2 mx-auto overflow-x-auto scrollbar-none">
+          <div
+            class="flex flex-row space-x-4 py-6 px-2 mx-auto overflow-x-auto scrollbar-none"
+          >
             <img
               v-for="item in data.items"
               :key="item.id"
@@ -115,6 +131,9 @@ import { catalogo } from "../../../data/catalogo2.js";
 import ToastSuccess from "../../toasts/ToastSuccess.vue";
 import ModalCatalogoCompra2 from "./ModalCatalogoCompra2.vue";
 
+import favoriteIcon from '../../../assets/images/favorite.svg';
+import favoriteFilled from '../../../assets/images/favorite2.svg';
+
 const props = defineProps({
   selectedCategory: {
     type: String,
@@ -134,6 +153,15 @@ const showToast = ref(false);
 
 const store = useStore();
 const emit = defineEmits(["adicionarAoCarrinho", "clear-filters"]);
+
+const favoriteItems = computed(() => store.getters.favoritesItems);
+
+const getFavoriteImageSrc = (item) => {
+  const isFavorite = store.getters.favoritesItems.some(
+    (favItem) => favItem.codigoProduto === item.id_produto
+  );
+  return isFavorite ? favoriteFilled : favoriteIcon;
+};
 
 const groupedCatalogo = computed(() => {
   let filteredItems = catalogo;
@@ -250,6 +278,17 @@ const handleAddToCart = () => {
   setTimeout(() => {
     showToast.value = false;
   }, 3000);
+};
+
+const handleAddToFavorites = (item) => {
+  store.dispatch("addFavorite", {
+    codigoProduto: item.id_produto,
+    nomeProduto: item.title,
+    imagem: item.imagem,
+    cor: item.cor,
+    valorUnitario: item.valor,
+    valorAntigo: item.valor_antigo
+  });
 };
 
 const getQuantidade = (productId, size) => {
