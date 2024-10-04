@@ -17,7 +17,7 @@ const store = createStore({
         cor
       });
     },
-    ADD_FAVORITE(state, {codigoProduto, nomeProduto, imagem, cor, valorUnitario, valorAntigo}) {
+    ADD_FAVORITE(state, {codigoProduto, nomeProduto, imagem, cor, valorUnitario, valorAntigo, tamanho}) {
       const index = state.favorites.findIndex(item => item.codigoProduto === codigoProduto);
       if (index !== -1) {
         state.favorites.splice(index, 1);
@@ -29,6 +29,7 @@ const store = createStore({
           cor,
           valorUnitario,
           valorAntigo,
+          tamanho,
         });
       }
     },

@@ -287,7 +287,8 @@ const handleAddToFavorites = (item) => {
     imagem: item.imagem,
     cor: item.cor,
     valorUnitario: item.valor,
-    valorAntigo: item.valor_antigo
+    valorAntigo: item.valor_antigo,
+    tamanho: item.tamanho,
   });
 };
 

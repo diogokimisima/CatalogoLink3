@@ -102,6 +102,9 @@ const showModal = (item) => {
 };
 
 const somaQuantidade = (quantidadePorTamanho) => {
+  if (!quantidadePorTamanho || typeof quantidadePorTamanho !== 'object') {
+    return 0;
+  }
   return Object.values(quantidadePorTamanho).reduce(
     (total, quantidade) => total + quantidade,
     0
