@@ -44,8 +44,13 @@
       :itemSizes="item.tamanho"
       :itemColor="item.cor"
       @addToCart="handleAddToCart"
+      @itemAdded="showToastMessage"
     />
   </dialog>
+
+  <transition name="slide">
+    <ToastSuccess v-if="showToast" message="Produto adicionado ao carrinho com sucesso" />
+  </transition>
 </template>
 
 <script setup>
@@ -54,6 +59,7 @@ import { ref, computed, reactive } from "vue";
 import { useStore } from "vuex";
 import { formatPrice, formatPercentage } from "../../utils/formatarValores.js";
 
+import ToastSuccess from "../toasts/ToastSuccess.vue";
 import favorite2 from "../../assets/images/favorite2.svg";
 import ModalCatalogoCompraFavorites from "../home/catalogo/ModalCatalogoCompraFavorites.vue";
 
@@ -61,6 +67,7 @@ const selectedItem = ref(null);
 const quantidades = reactive({});
 const store = useStore();
 const myModal = ref(null);
+const showToast = ref(false);
 
 const emit = defineEmits(["removeFavorite"]);
 
@@ -74,6 +81,13 @@ const showModal = () => {
   myModal.value.showModal();
 };
 
+const showToastMessage = () => {
+  showToast.value = true;
+  setTimeout(() => {
+    showToast.value = false;
+  }, 3000);
+};
+
 const handleAddToCart = (itemToAdd) => {
   store.dispatch("addToCart", itemToAdd);
   myModal.value.close();
@@ -83,3 +97,20 @@ const removeFavorite = () => {
   emit("removeFavorite", props.item.codigoProduto);
 };
 </script>
+
+<style scoped>
+.slide-enter-active,
+.slide-leave-active {
+  transition: transform 0.5s, opacity 0.5s;
+}
+.slide-enter-from,
+.slide-leave-to {
+  opacity: 0;
+  transform: translateX(100%);
+}
+.slide-enter-to,
+.slide-leave-from {
+  opacity: 1;
+  transform: translateX(0);
+}
+</style>

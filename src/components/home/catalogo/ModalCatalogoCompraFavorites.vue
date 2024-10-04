@@ -1,6 +1,20 @@
 <template>
+  <transition name="slide" mode="out-in">
+    <div
+      v-if="somaTotal() != 0"
+      :key="itemId"
+      class="flex flex-col items-center justify-center gap-0 fixed top-24 right-8 z-50 bg-blue-950 w-[70px] h-[70px] rounded-full transform transition-transform duration-300"
+    >
+      <p class="text-slate-400 -mt-2">R$</p>
+      <p class="text-white font-bold">
+        {{ formatPrice(somaTotal()) }}
+      </p>
+    </div>
+  </transition>
+
   <div class="modal-box h-full overflow-auto relative py-0 px-0">
     <form
+      v-motion-fade-visible
       class="flex flex-col justify-between border-b border-b-gray-400 sticky top-0 bg-white z-10 py-2 px-4"
       method="dialog"
     >
@@ -56,7 +70,7 @@
       </table>
     </div>
 
-    <div class="px-4 mt-4 mb-28">
+    <div class="px-4 mt-4">
       <p class="italic">
         <span class="font-semibold">Valor Unitário:</span> R${{ formatPrice(itemPrice) }}
       </p>
@@ -85,6 +99,7 @@ import { ref, computed } from "vue";
 import { X, Ruler, CandlestickChart, ShoppingCart } from "lucide-vue-next";
 import { formatPrice } from "../../../utils/formatarValores";
 import InputNumber2 from "../catalogo/CatalogoInputNumber2.vue";
+import ToastSuccess from "../../toasts/ToastSuccess.vue";
 
 const props = defineProps({
   itemId: String,
@@ -95,7 +110,7 @@ const props = defineProps({
   itemColor: String,
 });
 
-const emit = defineEmits(["addToCart"]);
+const emit = defineEmits(["addToCart", "itemAdded"]);
 
 const quantidades = ref({});
 
@@ -141,6 +156,7 @@ const handleAddToCart = () => {
   });
 
   quantidades.value[props.itemId] = {};
+  emit("itemAdded");
 };
 </script>
 

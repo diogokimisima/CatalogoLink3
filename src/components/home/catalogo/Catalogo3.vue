@@ -137,6 +137,7 @@ const handleAddToFavorites = (item) => {
     cor: item.cor,
     valorUnitario: item.valor,
     valorAntigo: item.valor_antigo,
+    tamanho: item.tamanho,
   });
 };
 
