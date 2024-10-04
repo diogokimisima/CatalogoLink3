@@ -28,11 +28,11 @@
 
       <ul class="mb-24">
         <CarrinhoItens
-          v-for="(item, index) in carrinho"
-          :key="index"
+          v-for="(item, idx) in carrinho"
+          :key="idx"
           :item="item"
-          :index="index"
-          :showModal="showModal"
+          :index="idx"
+          :showModal="(item) => showModal(item, idx)"
           :somaQuantidade="somaQuantidade"
         />
       </ul>
@@ -89,6 +89,7 @@ const store = useStore();
 const nome = ref("");
 const email = ref("");
 const celular = ref("");
+const index = ref(null);
 
 const carrinho = computed(() => store.getters.cartItems);
 
@@ -96,13 +97,14 @@ carrinho.value.forEach((item, index) => {
   item.numeroItem = index + 1;
 });
 
-const showModal = (item) => {
+const showModal = (item, itemIndex) => {
   selectedItem.value = item;
+  index.value = itemIndex;
   myModal.value.showModal();
 };
 
 const somaQuantidade = (quantidadePorTamanho) => {
-  if (!quantidadePorTamanho || typeof quantidadePorTamanho !== 'object') {
+  if (!quantidadePorTamanho || typeof quantidadePorTamanho !== "object") {
     return 0;
   }
   return Object.values(quantidadePorTamanho).reduce(
@@ -144,7 +146,6 @@ const validarTelefone = (telefone) => {
   const telefoneRegex = /^\d{10,11}$/; // 10 dígitos para números fixos e 11 para números móveis
   return telefoneRegex.test(telefone);
 };
-
 
 const confirmarCarrinho = () => {
   const mensagem = `

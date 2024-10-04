@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div v-if="groupedCatalogo.length === 0" class="text-center mt-5">
+    <div v-if="Object.keys(groupedCatalogo).length === 0" class="text-center mt-5">
       <h1 class="font-semibold">NENHUM PRODUTO ENCONTRADO.</h1>
     </div>
 
@@ -131,8 +131,8 @@ import { catalogo } from "../../../data/catalogo2.js";
 import ToastSuccess from "../../toasts/ToastSuccess.vue";
 import ModalCatalogoCompra2 from "./ModalCatalogoCompra2.vue";
 
-import favoriteIcon from '../../../assets/images/favorite.svg';
-import favoriteFilled from '../../../assets/images/favorite2.svg';
+import favoriteIcon from "../../../assets/images/favorite.svg";
+import favoriteFilled from "../../../assets/images/favorite2.svg";
 
 const props = defineProps({
   selectedCategory: {

@@ -3,8 +3,8 @@
 <template>
   <div>
     <!-- Card -->
-    <div v-if="filteredCatalogo.length === 0" class="text-center mt-5">
-      <h1 class="font-semibold">NENHUM PRODUTO ENCONTRADO.</h1>
+    <div v-if="Object.keys(filteredCatalogo).length === 0" class="text-center mt-5">
+      <h1 class="font-semibold">Nenhum produto encontrado.</h1>
     </div>
 
     <div

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div v-if="groupedCatalogo.length === 0" class="text-center mt-5">
+    <div v-if="Object.keys(groupedCatalogo).length === 0" class="text-center mt-5">
       <h1 class="font-semibold">NENHUM PRODUTO ENCONTRADO.</h1>
     </div>
 
