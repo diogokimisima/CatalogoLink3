@@ -10,7 +10,7 @@
           :key="item.codigoProduto"
           :item="item"
           :index="index"
-          @removerDoFavoritos="removerDoFavoritos"
+          @remove-favorite="removeFavorite"
         />
       </ul>
     </div>
@@ -21,22 +21,19 @@
 import { computed, ref } from "vue";
 import { useStore } from "vuex";
 
-const store = useStore();
-
-const favoritos = computed(() => store.getters.favoritesItems);
-
 import FavoritosVazio from "../components/carrinho/FavoritosVazio.vue";
 import FavoritosHeader from "../components/carrinho/FavoritosHeader.vue";
 import FavoritosItem from "../components/carrinho/FavoritosItem.vue";
 
-const removerDoFavoritos = (index) => {
-  store.dispatch("removeFromFavorites", index);
+const store = useStore();
 
-  showToastSuccess.value = true;
-  setTimeout(() => {
-    showToastSuccess.value = false;
-  }, 2000);
+const favoritos = computed(() => store.getters.favoritesItems);
+
+const removeFavorite = (codigoProduto) => {
+  store.dispatch('removeFavorite', codigoProduto);
 };
+
+
 </script>
 
 <style scoped>

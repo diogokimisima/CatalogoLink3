@@ -7,7 +7,7 @@
           :alt="'Imagem ' + item.numeroItem"
           class="w-[165px] h-[165px] object-contain mr-4 relative"
         />
-        <button class="absolute top-3 right-3" @click="showModal(item)">
+        <button class="absolute top-3 right-3" @click.stop="removeFavorite">
           <img class="w-5 h-5" :src="favorite2" alt="imagem favorito" />
         </button>
       </div>
@@ -42,4 +42,10 @@ const props = defineProps({
   index: Number,
   showModal: Function,
 });
+
+const emit = defineEmits(['removeFavorite']);
+
+const removeFavorite = () => {
+  emit('removeFavorite', props.item.codigoProduto);
+};
 </script>

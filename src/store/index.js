@@ -35,6 +35,9 @@ const store = createStore({
     REMOVE_FROM_CART(state, index) {
       state.cart.splice(index, 1);
     },
+    REMOVE_FAVORITE(state, codigoProduto) {
+      state.favorites = state.favorites.filter(item => item.codigoProduto !== codigoProduto);
+    },
   },
   actions: {
     addToCart({ commit }, payload) {
@@ -45,6 +48,9 @@ const store = createStore({
     },
     removeFromCart({ commit }, index) {
       commit('REMOVE_FROM_CART', index);
+    },
+    removeFavorite({ commit }, codigoProduto) {
+      commit('REMOVE_FAVORITE', codigoProduto);
     },
   },
   getters: {
