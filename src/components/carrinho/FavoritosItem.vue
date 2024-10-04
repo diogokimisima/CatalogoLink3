@@ -1,5 +1,5 @@
 <template>
-  <li v-motion-fade-visible class="px-1 py-2 w-[165px] rounded-md shadow-md shadow-neutral-400">
+  <li v-motion-fade-visible class="px-2 py-2 w-[165px] rounded-md shadow-md shadow-neutral-400">
     <div class="flex flex-col justify-between gap-y-2 h-full">
       <div class="">
         <img

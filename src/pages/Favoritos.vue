@@ -1,10 +1,10 @@
 <template>
   <FavoritosHeader />
 
-  <div class="flex flex-col justify-center items-center">
+  <div class="flex flex-col justify-center items-center mt-5">
     <FavoritosVazio v-if="favoritos.length === 0" />
-    <div class="px-4 w-full">
-      <ul v-if="favoritos.length !== 0" class="mb-24 flex flex-row flex-wrap justify-center gap-5">
+    <div class="px-1 w-full">
+      <ul v-if="favoritos.length !== 0" class="mb-24 flex flex-row flex-wrap justify-center gap-x-3 gap-y-5">
         <FavoritosItem
           v-for="(item, index) in favoritos"
           :key="item.codigoProduto"
