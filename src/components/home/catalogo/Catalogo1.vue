@@ -27,7 +27,7 @@
               :alt="'Image ' + data.selectedCard.id"
             />
             <img
-              class="absolute right-3 top-3"
+              class="absolute right-1 top-3 w-8 h-8"
               :src="getFavoriteImageSrc(data.selectedCard)"
               alt="logo favorito"
               @click.stop="handleAddToFavorites(data.selectedCard)"

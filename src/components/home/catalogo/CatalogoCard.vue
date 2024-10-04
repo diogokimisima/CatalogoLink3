@@ -9,9 +9,13 @@
   >
     <figure class="flex items-center justify-center relative">
       <img :src="item.imagem" :alt="'Image ' + item.id" />
-      <img :src="item.lancamento" class="absolute left-2 top-10 w-24" v-if="item.lancamento" />
       <img
-        class="absolute right-3 top-3"
+        :src="item.lancamento"
+        class="absolute left-2 top-10 w-24"
+        v-if="item.lancamento"
+      />
+      <img
+        class="absolute right-1 top-3 w-8 h-8"
         :src="getFavoriteImageSrc(item)"
         alt="logo favorito"
         @click.stop="addToFavorites(item)"

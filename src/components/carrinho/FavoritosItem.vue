@@ -7,8 +7,8 @@
           :alt="'Imagem ' + item.numeroItem"
           class="w-[165px] h-[165px] object-contain mr-4 relative"
         />
-        <button class="absolute top-3 right-3" @click.stop="removeFavorite">
-          <img class="w-5 h-5" :src="favorite2" alt="imagem favorito" />
+        <button class="absolute top-3 right-1" @click.stop="removeFavorite">
+          <img class="w-6 h-6" :src="favorite2" alt="imagem favorito" />
         </button>
       </div>
       <h2 class="text-[14px]">
